@@ -1,0 +1,76 @@
+body {
+    padding: 20px;
+    min-width:400px;
+}
+
+.feedr-plugin-wrapper {
+    position:relative;
+}
+
+#feedr-plugin-header {
+    color: #fff;
+}
+#feedr-plugin-header p,
+#feedr-plugin-header span,
+#feedr-plugin-finished span {
+    color:#fff !important;
+    font-size: 11px !important;
+}
+
+#feedr-plugin-wrapper {
+    /*background:#F3EED3;*/
+    z-index: 5000;
+    max-width:450px;
+    border: 1px solid rgba(236, 235, 235, 0.84);
+    padding : 20px;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    box-shadow : -1px -1px 5px #333;
+    color: #fff;
+}
+
+.feedr-plugin-background {
+  /* fallback */
+  background-color: #365571;
+  background-image: url(images/radial_bg.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* Safari 4-5, Chrome 1-9 */
+  /* Can't specify a percentage size? Laaaaaame. */
+  background: -webkit-gradient(radial, center center, 0, center center, 460, from(#365571), to(#192A43));
+
+  /* Safari 5.1+, Chrome 10+ */
+  background: -webkit-radial-gradient(circle, #365571, #192A43);
+
+  /* Firefox 3.6+ */
+  background: -moz-radial-gradient(circle, #365571, #192A43);
+
+  /* IE 10 */
+  background: -ms-radial-gradient(circle, #365571, #192A43);
+
+  /* Opera couldn't do radial gradients, then at some point they started supporting the -webkit- syntax, how it kinda does but it's kinda broken (doesn't do sizing) */
+}
+.feedr-plugin-overlay {
+    position:absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    zIndex: 1000000;
+}
+
+.feedr-plugin-small {
+    font-size: 0.8em;
+    color: #999;
+    display:block;
+}
+
+#feedr-plugin-finished {
+    margin-top: 20px;
+}
+
+#feedr-plugin-btns button {
+    display:inline-block;
+    margin: 20px 10px;
+}

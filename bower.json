@@ -1,0 +1,12 @@
+code{
+  "name": "feedr",
+  "version": "0.0.1",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "ionicons": "~1.5.2"
+  }
+}
