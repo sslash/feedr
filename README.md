@@ -1,3 +1,9 @@
+## TODO:
+ - Verify parser works for all the soccer pages. If not good enough, make them work
+ - Display all the feeds a small amount of articles per feed
+
+
+
 ## Feeds
 
 ### Soccer
