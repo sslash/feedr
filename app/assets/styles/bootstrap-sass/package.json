@@ -1,0 +1,60 @@
+{
+  "name": "bootstrap-sass",
+  "version": "3.2.0",
+  "description": "bootstrap-sass is a Sass-powered version of Bootstrap, ready to drop right into your Sass powered applications.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/twbs/bootstrap-sass"
+  },
+  "keywords": [
+    "bootstrap",
+    "sass",
+    "css"
+  ],
+  "contributors": [
+    {
+      "name": "Thomas McDonald"
+    },
+    {
+      "name": "Tristan Harward"
+    },
+    {
+      "name": "Peter Gumeson"
+    },
+    {
+      "name": "Gleb Mazovetskiy"
+    }
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twbs/bootstrap-sass/issues"
+  },
+  "gitHead": "a5f5954268779ce0faf7607b3c35191a8d0fdfe6",
+  "homepage": "https://github.com/twbs/bootstrap-sass",
+  "_id": "bootstrap-sass@3.2.0",
+  "scripts": {},
+  "_shasum": "e5fb0f4f1dc7d7f5f067664843a5470b152597e5",
+  "_from": "bootstrap-sass@",
+  "_npmVersion": "1.4.16",
+  "_npmUser": {
+    "name": "glebm",
+    "email": "glex.spb@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "shama",
+      "email": "kyle@dontkry.com"
+    },
+    {
+      "name": "glebm",
+      "email": "glex.spb@gmail.com"
+    }
+  ],
+  "dist": {
+    "shasum": "e5fb0f4f1dc7d7f5f067664843a5470b152597e5",
+    "tarball": "http://registry.npmjs.org/bootstrap-sass/-/bootstrap-sass-3.2.0.tgz"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/bootstrap-sass/-/bootstrap-sass-3.2.0.tgz"
+}

@@ -48,7 +48,19 @@ for each container:
 */
 'use strict';
 
-console.log('\'Allo \'Allo! Content script1337');
+console.log('\'Allo \'Allo! Content script1337ft');
+window.__feedrPlugin__ = window.__feedrPlugin__ || {};
+
+// The server might respond with '>'s. However, that might not
+// work with chrome's DOM...
+window.__feedrPlugin__.getSimpleContainer = function (container) {
+
+    if ( container.match('>').length ) {
+        return container.split('>').join(' ');
+    } else {
+        return container;
+    }
+};
 
 var apiUrl = 'http://localhost:3000/feeds';
 
@@ -76,12 +88,12 @@ $currentTag,
 ease = null;
 
 function createFullEl (el) {
-    return articleContainer + ' ' + el;
+
+    return window.__feedrPlugin__.getSimpleContainer(articleContainer) + ' ' + el;
 }
 
 function debugTag($t) {
     if (!$t) { return; }
-
     return createFullEl( $t.getDomPath(articleContainer, ease) );
 }
 
@@ -231,12 +243,12 @@ function tagSelected (e) {
     e.preventDefault();
     var $t = $(e.target);
 
-    // must reset this so dom.path can try be smart again
-    // ease = null;
-
     // return if clicked inside plugin
     if ($t.parents('#feedr-plugin-wrapper').length ||
         $t.is('#feedr-plugin-ok-btn')) { return; }
+
+    // must reset this so dom.path can try be smart again
+    ease = null;
 
     // first click! set the container!
     if ( state === 0 ) {
@@ -268,7 +280,7 @@ onSave = function () {
 
     $.post(apiUrl, data)
     .done(function () {
-        console.log('yeah');
+        console.log('yeah. Done.');
     })
     .fail(function () {
         console.log('fail');
@@ -306,7 +318,7 @@ onNextState = function () {
 
     // must reset this so dom.path can try be smart again
     // ease = null;
-    ease = 2;
+    // ease = 2;
 };
 
 // add space for a new tag path

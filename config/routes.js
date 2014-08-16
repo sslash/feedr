@@ -31,6 +31,8 @@ module.exports = function(app, express, passport, socket) {
 		.put(feedController.update)
 		.delete(feedController.delete);
 
+	router.post('/scrape/verifyPath', scrapeController.verifyPath);
+
 	router.get('/', homeController.home);
 	router.get('/styleguide', homeController.styleguide);
 	router.get('/login', userController.login);

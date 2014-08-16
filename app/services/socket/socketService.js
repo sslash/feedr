@@ -8,17 +8,24 @@ var mongoose        = require('mongoose'),
 module.exports = {
 
     createConnection : function (io, user) {
+        console.log('creating!!');
         io.on('connection', this.fetchAndScrapeFeeds.bind(this));
     },
 
     fetchAndScrapeFeeds : function (socket) {
         var scrapeService = new ScrapeService();
+
         Feed.find(function(err, res) {
             if ( err ) return def(err);
 
-            res.forEach(scrapeService.scrapeFeed.bind(scrapeService));
-            
-            scrapeService.on('html:parsed', socket.emit.bind(socket, 'data'));
+            console.log('Feeds: ' + res.length);
+            res.forEach(function (feed) {
+                scrapeService.scrapeFeed(feed);
+            });
+
+            scrapeService.on('html:parsed', function (data) {
+                socket.emit('data', data);
+            });
         });
     }
 

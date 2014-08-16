@@ -1,38 +1,25 @@
 'use strict';
 var m = require('../../../node_modules/mithril');
-// var landing = require('./landing/landing');
+var Feed = require('./feed/feed');
 
-m.route.mode = 'hash';
-// m.route(document.querySelector('#main'), '/', {
-//     '/': landing
+// m.route.mode = 'hash';
+// m.route(document.querySelector('#feeds'), '/', {
+//      '/': landing
 // });
-console.log('hello..');
 
 var io = window.io;
 var socket = io.connect('http://localhost:3000');
 
+var feeds = document.getElementById('feeds');
+
 socket.on('data', function (data) {
-    var list = document.getElementById('feeds');
+    var container = document.createElement('div');
+    container.setAttribute('style', 'width:20%;display:inline-block');
+    feeds.appendChild(container);
 
-    data.forEach(function(article) {
-        var node = document.createElement('LI');
-
-        var h = document.createElement('H1');
-        var ht = document.createTextNode(article.header.text);
-        h.appendChild(ht);
-
-        var p = document.createElement(p);
-        var pt = document.createTextNode(article.ingress.text);
-        p.appendChild(pt);
-
-        var i = document.createElement('img');
-        i.setAttribute('src', article.image.src);
-        i.setAttribute('height', '100');
-
-
-        node.appendChild(h);
-        node.appendChild(p);
-        node.appendChild(i);
-        list.appendChild(node);
+    data.articles.forEach(function(article) {
+        var ctrl = new Feed.controller({article: article, data : data});
+        var view = new Feed.view(ctrl);
+        m.render(container, view);
     });
 });

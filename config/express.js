@@ -10,7 +10,7 @@ var mongoConfig     = require('./mongoConfig'),
     session         = require('express-session'),
     hbs             = require('express-hbs');
 
-module.exports = function(app, config, passport) {
+module.exports = function(app, config, passport, cb) {
     app.use(compression());
     app.use(serveStatic(config.root + '/public'));
     app.use(serveStatic(config.root + '/app'));
@@ -18,10 +18,10 @@ module.exports = function(app, config, passport) {
 
     // views config
     app.engine('hbs', hbs.express3({
-        partialsDir: __dirname + '../app/templates'
+        partialsDir: config.root + '/app/templates'
     }));
     app.set('view engine', 'hbs');
-    app.set('views', __dirname + '../app/templates');
+    app.set('views', config.root + '/app/templates');
 
     app.use(favicon(config.root + '/app/assets/favicon.ico'));
     app.use(logger('dev'));
@@ -44,7 +44,7 @@ module.exports = function(app, config, passport) {
         store: new mongoStore({
             url: mongoConfig.getDbUrl(),
             collection : 'sessions'
-        }),
+        }, cb),
         saveUninitialized: true,
         resave: true
     }));

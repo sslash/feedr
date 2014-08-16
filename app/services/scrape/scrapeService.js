@@ -21,12 +21,18 @@ ScrapeService.prototype.scrapeFeed = function(feed) {
     .then(function($) {
 
         var scrapedData = dat.scrape($, feed);
-        return this.emit.call(dat, 'html:parsed', scrapedData);
+        return this.emit.call(dat, 'html:parsed', {
+            articles : scrapedData,
+            tags : feed.tags,
+            url : feed.url,
+            title : feed.title
+        });
 
     }.bind(this))
 
     // failed to fetch or parse feed
-    .fail(function (e){
+    .fail(function (e) {
+        console.log('hei: ' + e);
         throw e;
     }).done();
 };
@@ -43,20 +49,6 @@ ScrapeService.prototype.getHtml = function (url) {
 }
 
 ScrapeService.prototype.scrape = function ($, feed) {
-    // return {
-    //
-    //     // common header title
-    //     header:$('title').text(),
-    //
-    //     // banner icon
-    //     icon : feed.url + 'favicon.ico',
-    //
-    //     headers : this.getHeaders($, $(feed.selectors[0][0].tag)),
-    //
-    //     ingress : this.getIngress($, $(feed.selectors[2][0].tag)),
-    //
-    //     date : this.getDate($, $(feed.selectors[3][0].tag))
-    // };
 
     var headerTag = feed.selectors[0][0].tag;
     var imageTag = feed.selectors[1][0].tag;
@@ -65,22 +57,21 @@ ScrapeService.prototype.scrape = function ($, feed) {
 
     var articles = [];
     $(feed.articleContainer).each(function(i, $article) {
-        var $header = $($article).find(headerTag);
-        var $image = $($article).find(imageTag);
-        var $ingress = $($article).find(ingressTag);
-        var $date = $($article).find(dateTag);
+        var $header = $($article).find(' > ' + headerTag);
+        var $image = $($article).find(' > ' + imageTag);
+        var $ingress = $($article).find(' > ' + ingressTag);
+        var $date = $($article).find(' > ' + dateTag);
 
         if (!$header.length) return;
         if(!$image.length && !$ingress.length) return;
 
-
-        articles.push({
+        var article = {
             header : {
                 url : $header.attr('href'),
                 text : $header.text()
             },
             image : {
-                src : $image.attr('src')
+                src : $image.attr('data-src') || $image.attr('src')
             },
             ingress : {
                 text : $ingress.text()
@@ -88,7 +79,8 @@ ScrapeService.prototype.scrape = function ($, feed) {
             date : {
                 text : $date.text()
             }
-        });
+        };
+        articles.push(article);
     });
 
     return articles;

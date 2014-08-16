@@ -8,7 +8,7 @@ landing.controller = function () {
 };
 
 landing.view = function () {
-    return m('div.container.t-center', [
+    return m('li.container.t-center', [
         m('img.bg[src=' + '/images/sanfran.jpg]'),
         m('div.rel.base', [
             m('header.mvl', [

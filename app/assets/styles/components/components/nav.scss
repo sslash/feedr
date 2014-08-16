@@ -1,0 +1,9 @@
+.nav {
+    .img { padding: 4px !important; }
+}
+
+.navbar-brand { font-weight: 700; font-size: 2em;}
+.navbar {
+    border-radius: 0 !important;
+    @include box-shadow( 0px 0px 6px rgba(51, 51, 51, 0.75));
+}

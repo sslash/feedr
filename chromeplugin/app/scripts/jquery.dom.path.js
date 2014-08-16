@@ -1,4 +1,5 @@
 // CHALLENGES
+var _url = window.location.href;
 
 // 1.
 // If parsing is not good enough, you can filter last leaf by:
@@ -34,7 +35,6 @@
 
     var createSelectorForEl = function (el, ease) {
         var string = el.tagName.toLowerCase();
-        console.log('ease: ' + ease);
 
         if (notAValidTag(string, el)) { return; }
 
@@ -82,26 +82,51 @@
             // push the container part first
             if ( _articleContainer ) { fullPath = _articleContainer + ' ' + fullPath; }
 
-            var testResult = $(fullPath).length;
+            var occurences = $(fullPath).length;
             return {
-                children : testResult,
+                occurences : occurences,
                 path : selectorStr
             };
         } catch(e) {
             console.log('domPath Failed: ' + e);
-            return {children : 0};
+            return {occurences : 0};
         }
     }
 
     var getBestResult = function (results) {
-        var best = results[0], len = results.length;
-        for (var i = 1; i < len; i++) {
-            if (results[i].children > best.children) {
-                console.log('better: ' + results[i].path);
-                best = results[i];
+        var best = results[0].occurences, bestPath, len = results.length, occurences, path;
+
+        for (var i = 0; i < len; i++) {
+            occurences = 0;
+
+            // First time, when trying to find articleContainer,
+            // check with server to find path with most occurences
+            if ( !_articleContainer ) {
+                var currPath = results[i].path;
+                $.ajax({
+                    url :'http://localhost:3000/scrape/verifyPath',
+                    data : {_url : _url, path :currPath},
+                    type : 'POST',
+                    async : false,
+                    success : function (res) {
+                        occurences = res.occurences;
+                        path = res.path;
+                        console.log('asking serve: ' + path + ', res: '  + occurences);
+                    }
+                });
+            } else {
+                occurences = results[i].occurences;
+                path = results[i].path;
+            }
+
+            if (occurences >= best) {
+                best = occurences;
+                bestPath = path;
             }
         }
-        return best.path;
+
+        if ( occurences === 0 ) {console.log('Failed to find parentContainer!');}
+        return bestPath;
     }
 
     // Tries multiple paths to find the one
@@ -116,7 +141,6 @@
         return getBestResult(results);
     }
 
-    // ease is not in use. Instead this parser tries all values itself
 $.fn.getDomPath = function(container, ease) {
     _articleContainer = container;
 
@@ -131,7 +155,6 @@ $.fn.getDomPath = function(container, ease) {
         finalResult = trySmartParse(el);
     }
 
-    console.log('Returning: ' + finalResult);
     return finalResult;
     };
 })( jQuery );

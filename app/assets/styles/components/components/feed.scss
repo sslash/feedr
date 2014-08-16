@@ -1,0 +1,20 @@
+.feed {
+    display:inline-block;
+    margin:10px;
+    background-color:#fff;
+    padding:4px;
+    border: 1px solid $panel-default-border;
+    border-radius: 3px;
+
+    .header {
+        height: 30px;
+        background: #00AA9A;
+        margin: -4px;
+        padding: 6px;
+
+        .title { float: left;}
+        .tags {float:right;}
+    }
+}
+
+.label-tag { background-color:transparent; border:1px solid; margin: 2px;}

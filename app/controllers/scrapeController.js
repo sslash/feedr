@@ -27,105 +27,25 @@ function parseAndSend(res, url, opts) {
     });
 }
 
-function parse($, url, opts) {
+exports.verifyPath = function (req, res) {
+    var url = req.body._url;
+    var path = req.body.path;
+    var improvedPath = path.split(' ').join(' > ');
+    var mimimumForValidPath = 5;
 
-    opts.root = opts.root || 'article';
-    opts.link = opts.link || '> h2 > a';
+    getHtml(url)
+    .then(function($) {
+        var occurences = $(path).length;
 
-    return {
+        // Try if path works with the '>' selector. This is generally better
+        var occurences2 = $(improvedPath).length;
+        console.log('Path: ' + path+ ': ' + occurences + ', improved: ' + improvedPath + ': '+ occurences2);
 
+        if ( occurences2 >= mimimumForValidPath ) {
+            res.json({occurences : occurences2, path : improvedPath});
 
-        // common header title
-        header:$('title').text(),
-
-        // banner icon
-        icon : url + 'favicon.ico',
-
-        // filter articles: header, link and image
-        articles: $(opts.root).map(function(i, article) {
-
-            // top article tag
-            var $a = $(article);
-
-            // sometimes links are deep down in the article tag
-            // use find to filter down
-            var $link = opts.link ? $a.find(opts.link) : $a;
-
-            // either have a specific img el, or a plain first image find
-            var $img = opts.img ?
-                $a.find(opts.img.el).attr(opts.img.attr) :
-                $a.find('> img').attr('src')
-
-
-            return {
-                url : $link.attr('href'),
-                val : $link.text(),
-                img : $img
-            };
-        }).get()
-    };
-}
-
-exports.mozillaHacks = function(req, res) {
-    parseAndSend(res, 'http://hacks.mozilla.org/articles/', {
-        root : 'main li'
+        } else {
+            res.json({occurences : occurences, path : path});
+        }
     });
 };
-
-exports.lifeHackerDev = function(req, res) {
-    parseAndSend(res, 'http://lifehacker.com/tag/programming', {
-        link : 'h1 > a'
-    });
-};
-
-exports.infoworld = function(req, res) {
-    parseAndSend(res, 'http://www.infoworld.com/news', {
-        root : '#news li',
-        link : 'h1 > a'
-    });
-};
-
-exports.hackerNews = function (req, res) {
-    parseAndSend(res, 'http://news.ycombinator.com/', {
-        root :'td.title:not([valign])',
-        link : 'a'
-    });
-};
-
-
-exports.devNews = function (req, res) {
-    parseAndSend(res, 'http://venturebeat.com/category/dev/', {
-        img : { el : '> img', attr : 'data-src' }
-    });
-};
-
-exports.smashing = function(req, res) {
-    parseAndSend(res, 'http://www.smashingmagazine.com/', {});
-}
-
-
-
-// Custom send example
-//
-// exports.devNews = function (req, res) {
-//     var url = 'http://venturebeat.com/category/dev/';
-//     getHtml(url)
-//     .then(function($) {
-//
-//         send(res, {
-//             header:$('title').text(),
-//             icon : url + 'favicon.ico',
-//
-//             headings : $('article').map( function(i, a) {
-//                 var $a = $(a);
-//                 var $link = $a.find('> h2 > a');
-//                 return {
-//                     url : $link.attr('href'),
-//                     val : $link.text(),
-//                     img : $a.find('> img').attr('data-src')
-//                 };
-//             }).get()
-//         });
-//     })
-//     .fail(function(e) { res.send(e); }).done();
-// };
