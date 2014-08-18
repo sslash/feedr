@@ -12,14 +12,32 @@ var socket = io.connect('http://localhost:3000');
 
 var feeds = document.getElementById('feeds');
 
-socket.on('data', function (data) {
+var getContainer = function () {
     var container = document.createElement('div');
-    container.setAttribute('style', 'width:20%;display:inline-block');
+    container.setAttribute('style', 'width:48%;display:inline-block');
     feeds.appendChild(container);
+    return container;
+};
 
-    data.articles.forEach(function(article) {
-        var ctrl = new Feed.controller({article: article, data : data});
-        var view = new Feed.view(ctrl);
-        m.render(container, view);
+var render = function (article, data) {
+    var ctrl = new Feed.controller({article: article, data : data});
+    var view = new Feed.view(ctrl);
+    m.render(getContainer(), view);
+};
+
+var renderRest = function (data) {
+    data.articles.slice(1, data-length).forEach(function(article) {
+        render(article, data);
     });
+};
+
+// Receive a number of articles.
+socket.on('data', function (data) {
+
+    render(data.articles[0], data);
+    var startRenderTime = Math.random() * 1000;
+
+    setTimeout(function () {
+        renderRest(data);
+    }, startRenderTime);
 });

@@ -2,7 +2,12 @@
     .img { padding: 4px !important; }
 }
 
-.navbar-brand { font-weight: 700; font-size: 2em;}
+.navbar-brand {
+    font-weight: 700;
+    font-size: 3em;
+    margin-top: 7px;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
 .navbar {
     border-radius: 0 !important;
     @include box-shadow( 0px 0px 6px rgba(51, 51, 51, 0.75));

@@ -1,11 +1,16 @@
 $font-family-sans-serif: 'Josefin Slab', serif;
 $font-family-serif: 'Josefin Slab', serif;
 
+$nav-height: 58px;
+
 // colors
 
 $white: #F1EDE2;
 
-$navbar-default-bg: #F20233;
-$navbar-default-link-color: $white !default;
-
 $body-bg: $white;
+
+$brand-info:            #073D63 !default;
+$brand-primary:         #F20233 !default;
+
+$navbar-default-bg: $brand-primary;
+$navbar-default-link-color: $white !default;
