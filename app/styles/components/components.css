@@ -6738,6 +6738,22 @@ button.close {
   border-left: 1px solid rgba(7, 61, 99, 0.21);
 }
 
+.feedgets {
+  padding: 5px 10px;
+  margin: 0;
+  background: #fff;
+  top: 61px;
+  bottom: 0;
+  right: 0;
+  width: 19%;
+  border-left: 1px solid rgba(7, 61, 99, 0.21);
+  overflow-y: scroll;
+}
+
+.feedget {
+  margin-bottom: 10px;
+}
+
 .content {
   margin-top: 58px;
 }

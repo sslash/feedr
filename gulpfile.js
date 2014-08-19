@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 
 var paths = {
-  scripts: ['app/assets/scripts/**/*.js', '!app/assets/scripts/dist.js'],
+  scripts: ['app/assets/scripts/**/*.js', '!app/assets/scripts/dist.js', '!app/assets/scripts/libs/*.js'],
   sass : 'app/assets/styles**/*.scss',
   images : 'app/assets/images/**/*',
   css : 'app/assets/styles/**/*.css',
