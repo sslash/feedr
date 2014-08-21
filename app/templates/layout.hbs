@@ -32,12 +32,21 @@
     <!-- endbuild -->
 
     <link rel="stylesheet" href="assets/components/ionicons/css/ionicons.css">
-    <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+
   </head>
   <body>
+      <script>
+        window.feedrUser = {
+            username : "{{{user.name}}}",
+            img : "{{{user.profileImgFile}}}"
+        };
+      </script>
     <!-- Add your site or app content here -->
-    <main id="main">{{{body}}}</main>
+    <!-- {{> globals/nav}} -->
+    <div id="nav"></div>
+    <main id="main"></main>
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="clientscripts/dist.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

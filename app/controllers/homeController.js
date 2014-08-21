@@ -8,14 +8,16 @@ module.exports = function (socket) {
 
         home : function (req, res) {
 
-            var opts = { layout : '../layout'};
+            var opts = { layout : '../layout', user : {}};
 
             if (req.user) {
+                console.log('Logged in! ' + req.user.name);
                 opts.user = req.user;
                 res.render(path.join(process.cwd(), basePath, 'indexLIN' ), opts);
 
                 socketService.createConnection(socket, req.user);
             } else {
+                console.log('Not logged in! ');
                 res.render(path.join(process.cwd(), basePath,'index' ), opts);
             }
         },

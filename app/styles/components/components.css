@@ -6677,6 +6677,10 @@ button.close {
   margin: -4px;
   padding: 6px;
 }
+.feed .header img {
+  width: 20px;
+  margin-left: 10px;
+}
 .feed .header .title {
   float: left;
 }
