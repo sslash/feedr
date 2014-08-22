@@ -87,6 +87,8 @@ var listenToSocketIo = function () {
 var feedlist = {
 
     controller : function () {
+
+        // this is such a hack... fix this
         setTimeout(function () {
             listenToSocketIo();
         },1000);

@@ -1,3 +1,16 @@
-.content {
-    margin-top: $nav-height;
+.content { margin-top: $nav-height; }
+.t-center { text-align: center; }
+
+// forms
+.klr-search {
+    margin: 2em 0 5em 0;
+    height:50px;
+    width: 50%;
+    display:inline-block;
+}
+
+// iframe
+iframe {
+    border: 1px solid $modal-content-fallback-border-color;
+    @include box-shadow(0 0 4px rgba(51, 51, 51, 0.24));
 }

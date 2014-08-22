@@ -19,3 +19,14 @@
 }
 
 .label-tag { background-color:transparent; border:1px solid; margin: 2px;}
+
+
+.feed-thumb {
+    padding: 33px;
+    border: 1px solid $modal-content-fallback-border-color;
+    @include box-shadow(0 0 4px rgba(51, 51, 51, 0.24));
+    background: #fff;
+
+    @include gradient-radial();
+    a {font-weight: 700;}
+}

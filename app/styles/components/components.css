@@ -6694,6 +6694,19 @@ button.close {
   margin: 2px;
 }
 
+.feed-thumb {
+  padding: 33px;
+  border: 1px solid #999999;
+  box-shadow: 0 0 4px rgba(51, 51, 51, 0.24);
+  background: #fff;
+  background-image: -webkit-radial-gradient(circle, #555555, #333333);
+  background-image: radial-gradient(circle, #555555, #333333);
+  background-repeat: no-repeat;
+}
+.feed-thumb a {
+  font-weight: 700;
+}
+
 .menu {
   padding: 10px;
   border: 1px solid #dddddd;
@@ -6760,4 +6773,20 @@ button.close {
 
 .content {
   margin-top: 58px;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.klr-search {
+  margin: 2em 0 5em 0;
+  height: 50px;
+  width: 50%;
+  display: inline-block;
+}
+
+iframe {
+  border: 1px solid #999999;
+  box-shadow: 0 0 4px rgba(51, 51, 51, 0.24);
 }
