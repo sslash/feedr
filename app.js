@@ -18,16 +18,16 @@ fs.readdirSync(modelsPath).forEach(function (file) {
 var app = express();
 
 require('./config/passport')(passport, config);
-require('./config/express')(app, config, passport,
-    // after mongo is done
-    function () {
+require('./config/express')(app, config, passport);
+    // // after mongo is done
+    // function () {
 
         // start server
         var server = app.listen(config.port, function() {
             console.log('up and running ' + config.port);
         });
 
-        var socketIo = require('socket.io')(server);
+        // var socketIo = require('socket.io')(server);
 
-        require('./config/routes')(app, express, passport, socketIo);
-});
+        require('./config/routes')(app, express, passport);//, socketIo);
+// });

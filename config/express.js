@@ -44,7 +44,7 @@ module.exports = function(app, config, passport, cb) {
         store: new mongoStore({
             url: mongoConfig.getDbUrl(),
             collection : 'sessions'
-        }, cb),
+        }),//, cb),
         saveUninitialized: true,
         resave: true
     }));

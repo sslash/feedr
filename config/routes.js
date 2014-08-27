@@ -5,22 +5,9 @@ module.exports = function(app, express, passport, socket) {
 	var userController   = require('../app/controllers/userController'),
 		feedController	 = require('../app/controllers/feedController'),
 		scrapeController = require('../app/controllers/scrapeController'),
-		homeController = require('../app/controllers/homeController')(socket),
+		// homeController = require('../app/controllers/homeController')(socket),
 		landingController = require('../app/controllers/landingController'),
 		auth 			 = require('./middlewares/authorization');
-
-	// app.use(function(req, res) {
-	// 	res.status(404).render(process.cwd() + '/app/templates/404', { title: '404' });
-	// });
-
-
-	// router.get('/feed/hackerNews', scrapeController.hackerNews);
-	// router.get('/feed/devNews', scrapeController.devNews);
-	// router.get('/feed/lifeHackerDev', scrapeController.lifeHackerDev);
-	// router.get('/feed/infoworld', scrapeController.infoworld);
-	// router.get('/feed/mozillaHacks', scrapeController.mozillaHacks);
-	// router.get('/feed/smashingMagazine', scrapeController.smashing);
-
 
 	var router = express.Router();
 
@@ -34,8 +21,8 @@ module.exports = function(app, express, passport, socket) {
 
 	router.get('/', landingController.show);
 	router.post('/scrape/verifyPath', scrapeController.verifyPath);
-	router.get('/home', homeController.home);
-	router.get('/styleguide', homeController.styleguide);
+	// router.get('/home', homeController.home);
+	// router.get('/styleguide', homeController.styleguide);
 	router.get('/login', userController.login);
 	router.get('/logout', userController.logout);
 
