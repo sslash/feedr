@@ -1,16 +1,19 @@
 'use strict';
 var m = window.m = require('../../../node_modules/mithril');
 var home = require('./home/home');
+var landing = require('./landing/landing');
 var manage = require('./manage/manage');
-var nav = require('./nav/nav');
+// var nav = require('./nav/nav');
 window._ = require('underscore');
 
 
 m.route.mode = 'hash';
 
-m.module(document.getElementById('nav'), nav);
+// if logged in
+// m.module(document.getElementById('nav'), nav);
 
 m.route(document.getElementById('main'), '/', {
-    '/': home,
+    '/' : landing,
+    '/home': home,
     '/manage': manage
 });
