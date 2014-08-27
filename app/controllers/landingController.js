@@ -2,7 +2,7 @@ var path 			 = require('path'),
     basePath         = 'app/templates/';
 
 exports.show = function(req, res) {
-    var opts = { layout : '../layout', user : {}};
+    var opts = { layout : 'layout', user : {}};
 
     if (req.user) {
         console.log('Logged in! ' + req.user.name);
@@ -11,5 +11,5 @@ exports.show = function(req, res) {
         console.log('Not logged in! ');
     }
 
-    res.render(path.join(process.cwd(), basePath, 'landing/landing' ), opts);
+    res.render('landing/landing', opts);
 };
