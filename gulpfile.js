@@ -112,6 +112,17 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('app/clientscripts'))
 });
 
+gulp.task('plugin', function () {
+    gulp.src('app/assets/scripts/chromeplugin/contentscript.js')
+    .pipe($.browserify({
+        insertGlobals : true,
+        debug : !process.env.production
+    }))
+    .pipe($.concat('plugin.js'))
+    .pipe(gulp.dest(paths.build + '/clientscripts'))
+    .pipe(gulp.dest('app/clientscripts'));
+});
+
 // Scan hbs For Assets & Optimize Them
 gulp.task('html', function () {
   return gulp.src('app/templates/layout.hbs')
@@ -182,5 +193,5 @@ gulp.task('watch', function() {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'scripts', 'html', 'images', 'copy'], cb);
+  runSequence('styles', ['jshint', 'scripts', 'html', 'images', 'copy', 'plugin'], cb);
 });

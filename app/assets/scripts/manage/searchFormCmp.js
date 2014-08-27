@@ -1,7 +1,8 @@
 'use strict';
 var m = require('../../../../node_modules/mithril');
 var formLayout = require('../layouts/formLayout');
-var iframe = require('../create/iframe');
+// var iframe = require('../create/iframe');
+
 
 
 var searchFormCmp = {
@@ -14,10 +15,11 @@ var searchFormCmp = {
         this.onSubmit = function (e) {
             e.preventDefault();
             console.log('sappern ' + this.url());
-            var ctrl = new iframe.controller(this.url());
-            var view = iframe.view(ctrl);
-
-            m.render(document.getElementById('iframe'), view);
+            // problem:
+            // you'd want to fetch the site here, and create the feed from here.
+            // but it is not possible to set click listeners inside the cross domain iframe
+            // and its not possible to inject scripts into this cross domain ifram either
+            // so the only possibility is to use the chrome plugin for this.
 
         }.bind(this);
     },
