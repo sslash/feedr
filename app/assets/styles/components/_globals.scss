@@ -1,6 +1,13 @@
 .content { margin-top: $nav-height; }
 .t-center { text-align: center; }
 .base {position:relative; z-index:1;}
+.right {float:right;}
+.left {float:left;}
+
+// spacing
+.mal {
+    margin: 1.5em;
+}
 
 // forms
 .klr-search {
@@ -8,10 +15,4 @@
     height:50px;
     width: 50%;
     display:inline-block;
-}
-
-// iframe
-iframe {
-    border: 1px solid $modal-content-fallback-border-color;
-    @include box-shadow(0 0 4px rgba(51, 51, 51, 0.24));
 }

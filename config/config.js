@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'feedr'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: 'mongodb://localhost/feedr-development',
     facebook: {
       clientID: "266695190184340",
@@ -22,7 +22,7 @@ var config = {
     app: {
       name: 'feedr'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: 'mongodb://localhost/feedr-test',
     facebook: {
       clientID: "266695190184340",
@@ -36,7 +36,7 @@ var config = {
     app: {
       name: 'feedr'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: 'mongodb://localhost/feedr-production',
     facebook: {
       clientID: "266695190184340",

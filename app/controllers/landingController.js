@@ -1,7 +1,8 @@
 var path 			 = require('path'),
     basePath         = 'app/templates/';
 
-exports.show = function(req, res) {
+
+function render(req, res, tpl) {
     var opts = { layout : 'layout', user : {}};
 
     if (req.user) {
@@ -11,5 +12,13 @@ exports.show = function(req, res) {
         console.log('Not logged in! ');
     }
 
-    res.render('landing/landing', opts);
+    res.render(tpl, opts);
+}
+exports.show = function(req, res) {
+    render(req, res, 'landing/landing');
 };
+
+
+exports.begin = function (req, res) {
+    render(req, res, 'landing/begin');
+}
