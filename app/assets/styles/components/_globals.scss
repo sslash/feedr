@@ -5,9 +5,8 @@
 .left {float:left;}
 
 // spacing
-.mal {
-    margin: 1.5em;
-}
+.mal { margin: 1.5em; }
+.mvl { margin: 1.5em 0; }
 
 // forms
 .klr-search {
@@ -16,3 +15,7 @@
     width: 50%;
     display:inline-block;
 }
+
+
+// type
+.fat { font-weight: 700; }
